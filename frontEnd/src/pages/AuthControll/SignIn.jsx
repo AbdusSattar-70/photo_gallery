@@ -1,13 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
-import img from "../../assets/images/signup.jpg";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../../redux/authSlice";
+import img from "../../assets/images/signup.jpg";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [passwordMatchError, setPasswordMatchError] = useState("");
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,15 +34,15 @@ const SignIn = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const url = `http://localhost:3000/api/auth/signin`;
     try {
-      const res = await axios.post(url, formData);
-      setError(null);
+      dispatch(signInStart());
+      e.preventDefault();
+      const url = `http://localhost:3000/api/auth/signin`;
+      const data = await axios.post(url, formData);
+      dispatch(signInSuccess(data));
       navigate("/");
-      return res;
     } catch (err) {
-      setError(err.response.data);
+      dispatch(signInFailure(err?.response?.data));
     }
   };
 
@@ -85,11 +93,13 @@ const SignIn = () => {
               {error && <div className="text-red-600">{error?.message}</div>}
             </div>
             <div className="form-control mt-6">
-              <input
+              <button
                 type="submit"
-                value="sign in"
                 className="btn btn-primary"
-              />
+                disabled={passwordMatchError}
+              >
+                {loading ? "loading" : " Sign In"}
+              </button>
             </div>
           </form>
           <p className="text-center text-bold my-4">
