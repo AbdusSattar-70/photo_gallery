@@ -9,6 +9,7 @@ import {
   signInFailure,
 } from "../../redux/authSlice";
 import img from "../../assets/images/signup.jpg";
+import OAuth from "./OAuth";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ const SignIn = () => {
                 {loading ? "loading" : " Sign In"}
               </button>
             </div>
+            <OAuth />
           </form>
           <p className="text-center text-bold my-4">
             Don&apos;t have an Account?{" "}
