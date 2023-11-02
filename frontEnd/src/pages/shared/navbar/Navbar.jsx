@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo/logo.png";
 import { FaBars } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state) => state.auth);
   const navItems = (
     <>
       <li>
@@ -18,8 +20,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-blue-200 shadow-xl mb-4">
-      <div className="navbar-start">
+    <header className="navbar bg-base-100 mb-4 shadow-2xl">
+      <nav className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <FaBars />
@@ -31,30 +33,23 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <Link to="/">
-          <label className="btn btn-ghost btn-circle avatar">
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src={logo} />
+              <img src={logo} alt="profile photo" />
             </div>
           </label>
         </Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal font-semibold px-1">{navItems}</ul>
-      </div>
-      <div className="navbar-end">
-        <div className="flex gap-2 ml-5">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="input input-bordered w-24 md:w-auto bg-red-100/10"
-            />
-          </div>
+      </nav>
+      <nav className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">{navItems}</ul>
+      </nav>
+      <nav className="navbar-end">
+        {currentUser ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={logo} />
+                <img src={currentUser?.data?.avatar} />
               </div>
             </label>
             <ul
@@ -68,6 +63,14 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/sign-in"> Sign Out</Link>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="navbar-center lg:flex">
+            <ul className="menu menu-horizontal px-1">
+              <li>
                 <Link to="/sign-up"> Sign Up</Link>
               </li>
               <li>
@@ -75,9 +78,9 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </nav>
+    </header>
   );
 };
 

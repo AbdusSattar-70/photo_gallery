@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/images/signup.jpg";
 import { useState } from "react";
 import axios from "axios";
+import OAuth from "./OAuth";
 
 const SignUp = () => {
   const baseUrl = "http://localhost:3000";
@@ -142,6 +143,7 @@ const SignUp = () => {
                 Sign Up
               </button>
             </div>
+            <OAuth />
           </form>
           <p className="text-center text-bold my-4">
             Already have an Account?{" "}

@@ -8,7 +8,11 @@ const Root = () => {
     <>
       <Navbar />
       <Outlet />
-      {route === `/sign-up` || route === `/sign-in` ? null : <Footer />}
+      {route === `/sign-up` ||
+      route === `/sign-in` ||
+      route === `/profile` ? null : (
+        <Footer />
+      )}
     </>
   );
 };
