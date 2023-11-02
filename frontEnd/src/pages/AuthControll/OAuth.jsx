@@ -1,12 +1,14 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { signInSuccess, signInFailure } from "../../redux/authSlice";
 import app from "./firebase";
 
 const OAuth = () => {
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,12 +23,10 @@ const OAuth = () => {
         email: result.user.email,
         photo: result.user?.photoURL,
       });
-      console.log(data);
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       dispatch(signInFailure(error?.response?.data));
-      console.log("google error", error);
     }
   };
   return (

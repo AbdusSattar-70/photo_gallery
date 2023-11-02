@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,11 +12,13 @@ import img from "../../assets/images/signup.jpg";
 import OAuth from "./OAuth";
 
 const SignIn = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const { loading, error } = useSelector((state) => state.auth);
+  const from = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,8 +42,8 @@ const SignIn = () => {
       e.preventDefault();
       const url = `http://localhost:3000/api/auth/signin`;
       const data = await axios.post(url, formData);
-      dispatch(signInSuccess(data));
-      navigate("/");
+      dispatch(signInSuccess(data.data));
+      navigate(from, { replace: true });
     } catch (err) {
       dispatch(signInFailure(err?.response?.data));
     }
