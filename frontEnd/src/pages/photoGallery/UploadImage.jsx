@@ -3,14 +3,19 @@ import { useDispatch } from "react-redux";
 import { FaFileImage } from "react-icons/fa6";
 import { useRef } from "react";
 import useFirebaseStorage from "./useFirebaseStorage";
-import { uploadSuccess } from "../../redux/gallerySlice";
+import { uploadSuccess, updateProgress } from "../../redux/gallerySlice";
 
 const UploadImage = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
   const [files, setFiles] = useState([]);
   const [error, setError] = useState("");
-  const { uploadFile, urls, error: uploadErr } = useFirebaseStorage(files);
+  const {
+    progress,
+    uploadFile,
+    urls,
+    error: uploadErr,
+  } = useFirebaseStorage(files);
 
   const handleChange = (e) => {
     const images = e.target.files;
@@ -54,6 +59,13 @@ const UploadImage = () => {
       dispatch(uploadSuccess(urls));
     }
   }, [urls, dispatch]);
+
+  useEffect(() => {
+    if (progress !== null) {
+      dispatch(updateProgress(progress));
+    }
+  }, [progress, dispatch]);
+
   return (
     <>
       <form className="flex items-center ">

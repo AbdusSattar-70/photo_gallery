@@ -5,6 +5,7 @@ const initialState = {
   urls: [],
   loading: false,
   error: null,
+  progress: 0,
 };
 
 const gallerySlice = createSlice({
@@ -15,13 +16,18 @@ const gallerySlice = createSlice({
       state.loading = true;
     },
     uploadSuccess: (state, action) => {
+
       state.urls = action.payload;
       state.loading = false;
       state.error = null;
+      state.progress = null;
     },
     uploadFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+      updateProgress: (state, action) => {
+      state.progress = action.payload;
     },
     deletedStart: (state) => {
       state.loading = true;
@@ -45,7 +51,8 @@ export const {
   uploadFailure,
   deletedSuccess,
   deletedFailure,
-  deletedStart
+  deletedStart,
+  updateProgress,
  } = gallerySlice.actions;
 
 // Export the reducer
