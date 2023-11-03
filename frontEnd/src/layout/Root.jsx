@@ -10,6 +10,7 @@ const Root = () => {
       <Outlet />
       {route === `/sign-up` ||
       route === `/sign-in` ||
+      route === `/addgallery` ||
       route === `/profile` ? null : (
         <Footer />
       )}

@@ -5,8 +5,8 @@ import Home from "../pages/home/home/Home";
 import About from "../pages/about/About";
 import SignIn from "../pages/AuthControll/SignIn";
 import SignUp from "../pages/AuthControll/SignUp";
-// import PrivateRoute from "./PrivateRoute";
-import Gallery from "../pages/Gallery";
+import PrivateRoute from "./PrivateRoute";
+import AddGallery from "../pages/photoGallery/AddGallery";
 
 const router = createBrowserRouter([
   {
@@ -23,17 +23,13 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/gallery",
-        element: <Gallery />,
+        path: "/addgallery",
+        element: (
+          <PrivateRoute>
+            <AddGallery />
+          </PrivateRoute>
+        ),
       },
-      // {
-      //   path: "/profile",
-      //   element: (
-      //     <PrivateRoute>
-      //       <Profile />
-      //     </PrivateRoute>
-      //   ),
-      // },
       {
         path: "/sign-in",
         element: <SignIn />,

@@ -2,8 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './authSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import galleryReducer from './gallerySlice';
 
-const rootReducer = combineReducers({ auth: userReducer });
+const rootReducer = combineReducers({
+  auth: userReducer,
+  gallery: galleryReducer
+ });
 
 const persistConfig = {
   key: 'root',
