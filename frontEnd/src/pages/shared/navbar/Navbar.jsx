@@ -2,9 +2,32 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/logo/logo.png";
 import { FaBars } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import {
+  signOutUserStart,
+  signOutUserFailure,
+  signOutUserSuccess,
+} from "../../../redux/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("http://localhost:3000/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+    } catch (error) {
+      dispatch(signOutUserFailure(error));
+    }
+  };
   const navItems = (
     <>
       <li>
@@ -63,7 +86,18 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/sign-in"> Sign Out</Link>
+                <Link to="/addgallery" className="justify-between">
+                  Create Gallery
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={handleSignOut}
+                  className="text-red-700 cursor-pointer"
+                >
+                  Sign out
+                </button>
               </li>
             </ul>
           </div>

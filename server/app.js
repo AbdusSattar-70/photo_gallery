@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 
 // internal import
 const authRouter = require('./routes/authRouter');
+const galleryRouter = require('./routes/galleryRouter');
 const defaultErrorHandler = require('./middlewires/common/defaultErrorHandler');
 
 // for secrete key, password ect.
@@ -41,6 +42,7 @@ app.listen(port, () => {
 
 // routes
 app.use('/api/auth', authRouter);
+app.use('/api/gallery', galleryRouter);
 
 // default error handler
 app.use(defaultErrorHandler);
