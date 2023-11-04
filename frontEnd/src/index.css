@@ -1,13 +1,25 @@
 @tailwind base;
+
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+
+  html.dark {
+    @apply text-neutral-50;
+    @apply bg-neutral-800;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
+
 
 .img-wrap {
   overflow: hidden;
   height: 0;
   padding: 50% 0;
   position: relative;
-  opacity: 0.8;
 }
 
 .img-wrap img {
@@ -25,7 +37,6 @@
 }
 
 .check-input {
-  display: none;
   z-index: 1;
   position: absolute;
   left: 5px;
@@ -33,27 +44,11 @@
 }
 
 .check-custom:hover .check-input {
-  display: block;
+  opacity: 1;
 }
-
-.check-input[checked] {
-  display: block;
-}
-
 
 .check-custom:hover img {
   transform: scale(1.1);
   transition: transform 0.3s ease;
-  opacity: 0.4;
 }
 
-.dragged-image {
-  opacity: 0.7;
-  transform: scale(1.1);
-}
-
-.img-wrap img.dragged-image {
-  opacity: 0.7;
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}

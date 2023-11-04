@@ -1,28 +1,18 @@
-// const { currentUser } = useSelector((state) => state.user);
+// import {useSelector} from "react-redux"
+
+// const { currentUser } = useSelector((state) => state.auth);
 // const [formData, setFormData] = useState({
 //   imageUrls: [],
 //   name: "",
 //   description: "",
+//   private: false,
 // });
-// const [error, setError] = useState(false);
-// const [loading, setLoading] = useState(false);
-// const handleRemoveImage = (index) => {
-//   setFormData({
-//     ...formData,
-//     imageUrls: formData.imageUrls.filter((_, i) => i !== index),
-//   });
-// };
 
-// const handleSubmit = async (e) => {
+// const postHandleControll = async (e) => {
 //   e.preventDefault();
 //   try {
-//     if (formData.imageUrls.length < 1)
-//       return setError("You must upload at least one image");
-//     if (+formData.regularPrice < +formData.discountPrice)
-//       return setError("Discount price must be lower than regular price");
-//     setLoading(true);
-//     setError(false);
-//     const res = await fetch("/api/listing/create", {
+
+//     const res = await fetch("http://localhost:3000/api/gallery/create", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",

@@ -25,6 +25,7 @@
     "react-router-dom": "^6.17.0",
     "redux-persist": "^6.0.0",
     "sort-by": "^1.2.0",
+    "tw-elements-react": "^1.0.0-alpha2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
