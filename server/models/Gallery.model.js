@@ -14,6 +14,10 @@ const GallerySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    private: {
+      type: Boolean,
+
+    },
     userRef: {
       type: String,
       required: true,

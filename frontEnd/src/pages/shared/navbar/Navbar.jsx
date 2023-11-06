@@ -34,17 +34,17 @@ const Navbar = () => {
         <Link to="/"> Home</Link>
       </li>
       <li>
-        <Link to="/about"> About</Link>
-      </li>
-      <li>
-        <Link to="/gallery"> Gallery</Link>
+        <Link to="/gallery" className="justify-between">
+          Add Gallery
+          <span className="badge">New</span>
+        </Link>
       </li>
     </>
   );
 
   return (
     <header className="navbar bg-base-100 mb-4 shadow-2xl">
-      <nav className="navbar-start">
+      <nav className="navbar-start max-w-6xl mx-auto px-8">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <FaBars />
@@ -79,18 +79,6 @@ const Navbar = () => {
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
-              <li>
-                <Link to="/profile" className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/addgallery" className="justify-between">
-                  Create Gallery
-                  <span className="badge">New</span>
-                </Link>
-              </li>
               <li>
                 <button
                   onClick={handleSignOut}
