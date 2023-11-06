@@ -6,7 +6,7 @@ import About from "../pages/about/About";
 import SignIn from "../pages/AuthControll/SignIn";
 import SignUp from "../pages/AuthControll/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import AddGallery from "../pages/photoGallery/AddGallery";
+import DisplayGallery from "../pages/photoGallery/DisplayGallery";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +23,10 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/addgallery",
+        path: "/gallery",
         element: (
           <PrivateRoute>
-            <AddGallery />
+            <DisplayGallery />
           </PrivateRoute>
         ),
       },

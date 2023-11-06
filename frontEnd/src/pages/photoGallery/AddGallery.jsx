@@ -7,19 +7,15 @@ import {
   TEModalBody,
   TEModalFooter,
 } from "tw-elements-react";
-import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deletedSuccess } from "../../redux/gallerySlice";
 import UploadImage from "./UploadImage";
+import PostGallery from "./PostGallery";
 
-// Memoize the UploadImage component to prevent unnecessary re-renders
-// after successfull image upload.
-const MemoizedUploadImage = React.memo(UploadImage);
-
-const AddGallery = ({ postHandleControll }) => {
+const AddGallery = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const { urls, progress } = useSelector((state) => state.gallery);
@@ -122,39 +118,42 @@ const AddGallery = ({ postHandleControll }) => {
                   )}
 
                   {/* Add a container for the Droppable */}
-                  <div className="overflow-x-auto">
-                    <Droppable droppableId="image-list" direction="horizontal">
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
-                          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"
-                        >
-                          {images.map((url, index) => (
-                            <Draggable
-                              key={index}
-                              draggableId={`image-${index}`}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                // Apply the border to the parent container
-                                <div className="image-container border border-solid border-black">
+                  <div>
+                    <div className="overflow-x-auto">
+                      <Droppable
+                        droppableId="image-list"
+                        direction="horizontal"
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                            className="grid gap-4"
+                            style={{
+                              gridTemplateColumns:
+                                "repeat(auto-fit, minmax(8.5rem, 1fr))",
+                            }}
+                          >
+                            {images.map((url, index) => (
+                              <Draggable
+                                key={index}
+                                draggableId={`image-${index}`}
+                                index={index}
+                              >
+                                {(provided, snapshot) => (
                                   <div
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
-                                    className={`card card-compact bg-base-100 shadow-sm ${
-                                      index === 0 ? "col-span-2 row-span-2" : ""
-                                    } ${
-                                      // Add a condition to change grid classes dynamically
-                                      window.innerWidth < 768
-                                        ? "sm:col-span-1 sm:row-span-1"
-                                        : ""
-                                    }`}
+                                    className="card card-compact bg-base-100 shadow-sm"
                                     style={{
                                       backgroundColor: snapshot.isDragging
                                         ? "lightsalmon"
                                         : "lightcyan",
                                       ...provided.draggableProps.style,
+                                      gridColumn:
+                                        index === 0 ? "span 2" : "span 1",
+                                      gridRow:
+                                        index === 0 ? "span 2" : "span 1",
                                     }}
                                   >
                                     <div className="check-custom relative">
@@ -177,17 +176,17 @@ const AddGallery = ({ postHandleControll }) => {
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              )}
-                            </Draggable>
-                          ))}
-                          {provided.placeholder}
-                          <div className="border border-dashed border-black">
-                            <MemoizedUploadImage />
+                                )}
+                              </Draggable>
+                            ))}
+                            {provided.placeholder}
+                            <div className="border border-dashed border-black">
+                              <UploadImage />
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </Droppable>
+                        )}
+                      </Droppable>
+                    </div>
                   </div>
                 </div>
               </DragDropContext>
@@ -203,13 +202,7 @@ const AddGallery = ({ postHandleControll }) => {
                 </button>
               </TERipple>
               <TERipple rippleColor="light">
-                <button
-                  onClick={postHandleControll}
-                  type="button"
-                  className="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                >
-                  Add Gallery
-                </button>
+                <PostGallery />
               </TERipple>
             </TEModalFooter>
           </TEModalContent>
@@ -217,10 +210,6 @@ const AddGallery = ({ postHandleControll }) => {
       </TEModal>
     </div>
   );
-};
-
-AddGallery.propTypes = {
-  postHandleControll: PropTypes.func.isRequired,
 };
 
 export default AddGallery;

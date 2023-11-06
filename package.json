@@ -4,9 +4,9 @@
   "description": "Implement JWT, Firebase, and Google OAuth for secure and seamless user access. Real-world CRUD Operations.",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development && nodemon server/app.js",
-    "prod": "set NODE_ENV=production && node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js",
+    "build": "npm install && npm install --prefix frontEnd && npm run build --prefix frontEnd"
   },
   "keywords": [],
   "author": "",

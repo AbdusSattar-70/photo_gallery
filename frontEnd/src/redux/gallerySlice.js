@@ -35,6 +35,13 @@ const gallerySlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+
+    postSuccess: (state, action) => {
+      state.urls = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+
     deletedFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -50,6 +57,7 @@ const {
   deletedFailure,
   deletedStart,
   updateProgress,
+  postSuccess,
 } = gallerySlice.actions;
 
 export {
@@ -60,6 +68,7 @@ export {
   deletedFailure,
   deletedStart,
   updateProgress,
+  postSuccess,
 };
 
 export default gallerySlice.reducer;

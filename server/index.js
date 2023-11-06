@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 // external import
+import path from 'path';
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -43,6 +45,12 @@ app.listen(port, () => {
 // routes
 app.use('/api/auth', authRouter);
 app.use('/api/gallery', galleryRouter);
+
+app.use(express.static(path.join(__dirname, '/frontEnt/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontEnt', 'dist', 'index.html'));
+});
 
 // default error handler
 app.use(defaultErrorHandler);
