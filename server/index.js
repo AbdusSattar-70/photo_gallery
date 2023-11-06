@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 // external import
-import path from 'path';
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 // internal import
 const authRouter = require('./routes/authRouter');
@@ -46,10 +46,10 @@ app.listen(port, () => {
 app.use('/api/auth', authRouter);
 app.use('/api/gallery', galleryRouter);
 
-app.use(express.static(path.join(__dirname, '/frontEnt/dist')));
+app.use(express.static(path.join(__dirname, '/frontEnd/dist')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontEnt', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontEnd', 'dist', 'index.html'));
 });
 
 // default error handler
