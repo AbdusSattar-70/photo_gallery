@@ -1,5 +1,5 @@
 {
-  "name": "photo gallery",
+  "name": "photo_gallery",
   "version": "1.0.0",
   "description": "Implement JWT, Firebase, and Google OAuth for secure and seamless user access. Real-world CRUD Operations.",
   "main": "index.js",
