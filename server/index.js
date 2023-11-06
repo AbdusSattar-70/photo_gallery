@@ -46,10 +46,24 @@ app.listen(port, () => {
 app.use('/api/auth', authRouter);
 app.use('/api/gallery', galleryRouter);
 
-app.use(express.static(path.join(__dirname, 'client/dist')));
+if (process.env.NODE_ENV === 'production') {
+  // In a production environment (e.g., Render)
+  app.use(express.static(path.join(__dirname, 'src/server/client/dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/dist/index.html'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/server/client/dist/index.html'));
+  });
+} else {
+  // In a development environment (your local machine)
+  app.use(express.static(path.join(__dirname, 'client/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/dist/index.html'));
+  });
+}
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 // default error handler
