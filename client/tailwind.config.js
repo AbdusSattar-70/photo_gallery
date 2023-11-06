@@ -1,4 +1,6 @@
+/** @type {import('tailwindcss').Config} */
 import daisyui from 'daisyui'
+import twElementsReact from 'tw-elements-react/dist/plugin.cjs';
 export default {
   content: [
     "./index.html",
@@ -8,7 +10,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [daisyui, {
-    resolve: "tw-elements-react/dist/plugin.cjs"
-  }],
+  plugins: [daisyui,twElementsReact],
 }
