@@ -38,7 +38,7 @@
 
 ## 📖 Photo Gallery <a name="about-project"></a>
 
-Welcome to the Photo Gallery App! A fully responsive both mobile and desktop full-stack application built using React.js for the front-end and Node.js with Express.js for the back-end. It allows users to create and manage their photo galleries securely.
+Welcome to the Photo Gallery App! A fully responsive both mobile and desktop full-stack application built using React.js for the front-end and Node.js with Express.js for the back-end. It allows users to create and manage their photo galleries securely. This documentation provides insights into the project structure, key technologies used, and an overview of the application features.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -73,15 +73,49 @@ Welcome to the Photo Gallery App! A fully responsive both mobile and desktop ful
   </ul>
 </details>
 
+## Project Structure
+
+The frontend of the Photo Gallery Web App is organized into a standard React project structure, including components, assets, and configuration files. The main folders and files in the project structure include:
+
+- `.github/workflow/linters.yml`: GitHub action CI/CD for automation build process.
+- `src/`: The source code for the React application.
+  - `assets/`: Stores static assets such as images and styles.
+  - `layout/Root.jsx`: The layout and entry point of the application.
+  - `main.js`: Renders the React app and attaches it to the DOM.
+  - `pages/`: Contains all React components used in the application.
+  - `pages/..`: Contains `about`,`Auth controll`,`errorpage`, `homepage`, `photo gallery`, and all `shared` components .
+  - `routes/`: Contains all Route declaration.
+  - `redux/`: Contains all global state management logic.
+- `package.json`: Lists project dependencies and defines scripts for development and building.
 <!-- Features -->
+
+# Validation and Error Handling
+
+- The frontend employs validation and error handling to enhance the user experience:
+
+- Real-time validation of user input during registration to ensure data accuracy.
+- Comprehensive error handling for API requests, ensuring graceful responses to user interactions.
+
+# Google OAuth Integration
+
+- Google OAuth is seamlessly integrated into the app:
+- Users can register and log in using their Google accounts.
+- This integration ensures secure and straightforward access.
 
 ## Key Features <a name="key-features"></a>
 
 - User authentication with Firebase and JWT for secure access.
 - CRUD (Create, Read, Update, Delete) operations for photo galleries.
+
+# Drag-and-Drop Functionality
+
+- The app utilizes React-Beautiful-DnD to implement a smooth and intuitive drag-and-drop feature:
 - Drag-and-drop functionality for reordering images in galleries.
+- Simply drag an image and drop it in the desired position.
+- The updated order is immediately reflected.
 - Integration with Google OAuth for seamless user registration and login.
 - Real-time validation of user input for registration.
+- Logout functionality.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -179,9 +213,12 @@ You can deploy this project using:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Web Responsiveness for all users**
+- **Add Search functionality**
 - **Add web accessibility**
-- **Add Login page**
+- **Add about page and RBAC controll**
+- **Add test case using jest**
+- **Image Download and zoom options**
+- **Add Lazy loading**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
