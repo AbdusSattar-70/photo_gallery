@@ -2,8 +2,10 @@
 import { useSelector } from "react-redux";
 import { uploadFiles } from "../../redux/uploadFile";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PostGallery = ({ setShowModal, images }) => {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -36,6 +38,8 @@ const PostGallery = ({ setShowModal, images }) => {
     if (result.code === 200 && images) {
       dispatch(uploadFiles([]));
       await setShowModal(false);
+    } else {
+      navigate("/sign-in");
     }
   };
 

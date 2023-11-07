@@ -6,7 +6,6 @@ import About from "../pages/about/About";
 import SignIn from "../pages/AuthControll/SignIn";
 import SignUp from "../pages/AuthControll/SignUp";
 import PrivateRoute from "./PrivateRoute";
-
 import SeeAll from "../pages/photoGallery/SeeAll";
 
 const router = createBrowserRouter([
@@ -31,6 +30,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "/sign-in",
         element: <SignIn />,
